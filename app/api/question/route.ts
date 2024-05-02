@@ -1,4 +1,4 @@
-import { qa } from "@/utils/ai";
+import { qa } from "@/utils/ai/journalAI";
 import { getUserFromClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { NextResponse } from "next/server";

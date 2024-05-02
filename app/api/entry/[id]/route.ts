@@ -1,5 +1,5 @@
 import { update } from "@/utils/actions";
-import { analyzeEntry } from "@/utils/ai";
+import { analyzeEntry } from "@/utils/ai/journalAI";
 import { getUserFromClerkID } from "@/utils/auth";
 import { prisma } from "@/utils/db";
 import { NextResponse } from "next/server";
