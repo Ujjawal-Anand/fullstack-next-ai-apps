@@ -1,16 +1,22 @@
+import Spinner from "@/components/Spinner";
 import { prisma } from "@/utils/db";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 const createNewUser = async () => {
   const user = await currentUser();
+  let match;
 
   if (user && user.id) {
-    const match = prisma.user.findUnique({
-      where: {
-        clerkId: user.id,
-      },
-    });
+    try {
+      match = await prisma.user.findUnique({
+        where: {
+          clerkId: user.id,
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
 
     if (!match) {
       await prisma.user.create({
@@ -22,11 +28,13 @@ const createNewUser = async () => {
     }
   }
 
-  redirect("/journal");
+  redirect("/");
 };
 
-export default async function NewUserPage() {
+const NewUserPage = async () => {
   await createNewUser();
 
-  return <div>...loading</div>;
-}
+  return <Spinner />;
+};
+
+export default NewUserPage;
