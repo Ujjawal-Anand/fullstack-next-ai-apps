@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useAutosave } from "react-autosave";
 import Spinner from "./Spinner";
 import { useRouter } from "next/navigation";
-import { deleteEntry } from "@/utils/api";
+import { deleteEntry, updateEntry } from "@/utils/api";
 
-const Editor = ({ entry }) => {
+const Editor = ({ entry }: { entry: any }) => {
   const [text, setText] = useState(entry.content);
   const [currentEntry, setEntry] = useState(entry);
   const [isSaving, setIsSaving] = useState(false);

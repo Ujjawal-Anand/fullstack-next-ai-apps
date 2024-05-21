@@ -12,11 +12,17 @@ export const POST = async (request: Request) => {
       userId: user.id,
     },
     select: {
+      id: true, // Add the 'id' property
       content: true,
       createdAt: true,
     },
   });
 
-  const answer = await qa(question, entries);
+  const formattedEntries = entries.map((entry) => ({
+    ...entry,
+    createdAt: entry.createdAt.toISOString(), // Convert createdAt to string
+  }));
+
+  const answer = await qa(question, formattedEntries);
   return NextResponse.json({ data: answer });
 };

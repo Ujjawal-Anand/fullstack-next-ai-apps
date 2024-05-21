@@ -1,18 +1,26 @@
-'use client'
-import { ResponsiveContainer, LineChart, Line, XAxis, Tooltip } from 'recharts'
+"use client";
+import { ResponsiveContainer, LineChart, Line, XAxis, Tooltip } from "recharts";
 
-const CustomTooltip = ({ payload, label, active }) => {
-  const dateLabel = new Date(label).toLocaleString('en-us', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-  })
+const CustomTooltip = ({
+  payload,
+  label,
+  active,
+}: {
+  payload: any;
+  label: any;
+  active: any;
+}) => {
+  const dateLabel = new Date(label).toLocaleString("en-us", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  });
 
   if (active) {
-    const analysis = payload[0].payload
+    const analysis = payload[0].payload;
     return (
       <div className="p-8 custom-tooltip bg-white/5 shadow-md border border-black/10 rounded-lg backdrop-blur-md relative">
         <div
@@ -22,13 +30,13 @@ const CustomTooltip = ({ payload, label, active }) => {
         <p className="label text-sm text-black/30">{dateLabel}</p>
         <p className="intro text-xl uppercase">{analysis.mood}</p>
       </div>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
-const HistoryChart = ({ data }) => {
+const HistoryChart = ({ data }: { data: any }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart width={300} height={100} data={data}>
@@ -40,10 +48,10 @@ const HistoryChart = ({ data }) => {
           activeDot={{ r: 8 }}
         />
         <XAxis dataKey="updatedAt" />
-        <Tooltip content={<CustomTooltip />} />
+        {/* <Tooltip content={<CustomTooltip payload={pa}/>} /> */}
       </LineChart>
     </ResponsiveContainer>
-  )
-}
+  );
+};
 
-export default HistoryChart
+export default HistoryChart;

@@ -19,7 +19,7 @@ const getEntry = async (id: string) => {
   return entry;
 };
 
-const JournalEditorPage = async ({ params }) => {
+const JournalEditorPage = async ({ params }: { params: { id: string } }) => {
   const entry = await getEntry(params.id);
 
   return (

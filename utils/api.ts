@@ -1,6 +1,9 @@
 const createURL = (path: string) => window.location.origin + path;
 
-export const fetcher = (...args) => fetch(...args).then((res) => res.json());
+export const fetcher = async (...args: any[]) => {
+  const res = await fetch(args[0], args[1]);
+  return res.json();
+};
 
 export const deleteEntry = async (id: string) => {
   const res = await fetch(
@@ -31,7 +34,7 @@ export const newEntry = async () => {
   }
 };
 
-export const updateEntry = async (id, updates) => {
+export const updateEntry = async (id: any, updates: { content: any }) => {
   const res = await fetch(
     new Request(createURL(`/api/entry/${id}`), {
       method: "PATCH",
@@ -46,7 +49,7 @@ export const updateEntry = async (id, updates) => {
   }
 };
 
-export const askQuestion = async (question) => {
+export const askQuestion = async (question: string) => {
   const res = await fetch(
     new Request(createURL(`/api/question`), {
       method: "POST",
